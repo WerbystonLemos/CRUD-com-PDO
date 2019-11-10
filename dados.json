@@ -1,0 +1,16 @@
+[
+    {
+        "DESCRICAO": "ENEL",
+        "VLRTOTAL": 120,
+        "VLRMENSAL": "*" ,
+        "QTDPARCELA": "*",
+        "VENCIMENTO": "10"
+    },
+    {
+        "DESCRICAO": "Faculdade",
+        "VLRTOTAL": 10000,
+        "VLRMENSAL": "300" ,
+        "QTDPARCELA": "40",
+        "VENCIMENTO": "10"
+    }
+]
