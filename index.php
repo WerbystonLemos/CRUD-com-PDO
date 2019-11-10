@@ -84,7 +84,7 @@
             </div>
             <div class="col-lg-9" style="float:right">
             <div class="col-12">
-                <button onclick="editarDespesa()" class="btn">EDIT</button>
+                <button data-target="#modalEdit" onclick="editarDespesa()" class="btn">EDIT</button>
                 <button onclick="deleteDespesa()" class="btn">DEL</button>
             </div>
             <table id="tableDespesas" data-toggle="table">
@@ -96,7 +96,6 @@
                         <th data-field="vlr_mensal">Valor Mensal</th>
                         <th data-field="qtd_parcelas">QTD Parcelas</th>
                         <th data-field="vencimento">Vencimento</th>
-                        <th data-formatter="returnAcao">Ação</th>
                     </tr>
                 </thead>
             </table>
@@ -104,6 +103,36 @@
         
         </div>
 
+        <!-- INICIO MODAIS -->
+        
+        <div id="modalEdit" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FIM MODAIS -->
+
+        
+        <!-- JQuery 3.3.1 e o recomendado pela versao Boostrap 4.1 -->
+        <!-- <script> src="libs/JQuery/jquery-3.3.1.slim.min.js"</script> -->
+        <script> src="libs/JQuery/jquery-3.4.1.min.js"</script>
+        <script> src="libs/PopperJS/popper.min.js"</script> <!--Bootstrap Popper Js -->
+        <script> src="libs/Bootstrap/bootstrap.min.js"</script> <!--Bootstrap Js --> 
         <script>
             // inicio de setagens padrao
             $("#tableDespesas").bootstrapTable();
@@ -113,13 +142,6 @@
             // $("#form_vlrMensal").mask('999,99')
             $("#form_vencimento").mask('99/99/9999')
             // fim de setagens padrao
-
-            // redenrizacao da coluna acao
-            function returnAcao(a, b, c)
-            {
-                // console.log(a+" | "+b.id+" | "+c)
-                return "<button class='btn btn-xs'>EXCLUIR</button>";
-            }
 
             function cadastrtaDespesa()
             {
@@ -148,23 +170,9 @@
                 })
             }
 
-            function editarDespesa()
-            {
-                let selecionado = $("#tableDespesas").bootstrapTable("getSelections")[0]["id"];
-
-                
-                // $.ajax({
-                //     url: "controller/controllerIndexUpdate.php",
-                //     data
-                // })
-            }
+            function editarDespesa(){}
 
             function deleteDespesa(){}
-        </script>
-        <!-- JQuery 3.3.1 e o recomendado pela versao Boostrap 4.1 -->
-        <!-- <script> src="libs/JQuery/jquery-3.3.1.slim.min.js"</script> -->
-        <script> src="libs/JQuery/jquery-3.4.1.min.js"</script>
-        <script> src="libs/PopperJS/popper.min.js"</script> <!--Bootstrap Popper Js -->
-        <script> src="libs/Bootstrap/bootstrap.min.js"</script> <!--Bootstrap Js -->  
+        </script> 
     </body>
     </html>
