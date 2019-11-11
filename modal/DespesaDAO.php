@@ -19,6 +19,7 @@ class DespesaDAO
         $res->bindValue(":prcls", $prcls);
         $res->bindValue(":vcto", $vcto);
         $res->execute();
+    
     }
     public function despesaReload()
     {

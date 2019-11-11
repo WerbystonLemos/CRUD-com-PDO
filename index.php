@@ -140,7 +140,7 @@
 
             // $("#form_vlrTotal").mask('0,00')
             // $("#form_vlrMensal").mask('999,99')
-            $("#form_vencimento").mask('99/99/9999')
+            // $("#form_vencimento").mask('99/99/9999')
             // fim de setagens padrao
 
             function cadastrtaDespesa()
@@ -158,21 +158,53 @@
                     cache: false,
                     contentType: false,
                     processData: false,
-                    type: 'post',
+                    type: 'POST',
                     dataType: 'JSON',
                     success: function(ret){
-                        console.log(ret)
+                        // console.log(ret)
+                        console.log("registro feito com sucesso!")
                     },
-                    error: function(er)
+                    error: function(xhr, desc, err)
                     {
-                        console.log(er)
+                        console.log(xhr)
+                        console.log("tem alguma coisa errada"+desc + "nErro:" + err);
                     }
                 })
             }
 
-            function editarDespesa(){}
+            function editarDespesa(){
 
-            function deleteDespesa(){}
+                let formulario = $("#formCadastroDespesa")[0];
+                let formData = new FormData(formulario);
+                let desc           = $("#form_descricao").val()
+                let vlrTotal       = $("#form_vlrTotal").val()
+                let vlrMensal      = $("#form_vlrMensal").val()
+                let qtdParcelas    = $("#form_qtdParcelas").val()
+                let vencimento     = $("#form_vencimento").val()
+                $.ajax({
+                    url: "controller/controllerIndexUpdate.php",
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function(ret){
+                        // console.log(ret)
+                        console.log("registro atualizado com sucesso!")
+                    },
+                    error: function(xhr, desc, err)
+                    {
+                        console.log(xhr)
+                        console.log("tem alguma coisa errada"+desc + "nErro:" + err);
+                    }
+                })
+
+            }
+
+            function deleteDespesa(){
+
+            }
         </script> 
     </body>
     </html>

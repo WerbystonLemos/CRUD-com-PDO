@@ -7,8 +7,9 @@ class conectionFactory
     {
         try
         {
-            $pdo = new PDO("mysql:dbname=siscontrole; host: localhost", "root", "");
+            $pdo = new PDO("mysql:dbname=siscontrole; host:localhost", "root", "");
             //echo "Conexão estabelecida com sucesso!";
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $pdo;
         }
         catch(PDOException $e)
