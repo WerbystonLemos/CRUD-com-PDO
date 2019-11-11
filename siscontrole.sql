@@ -34,7 +34,7 @@ CREATE TABLE `despesas` (
   `vlr_total` decimal(10,0) DEFAULT NULL,
   `vlr_mensal` int(11) NOT NULL,
   `qtd_parcelas` int(11) DEFAULT NULL,
-  `vencimento` int(11) DEFAULT NULL
+  `vencimento` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
