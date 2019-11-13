@@ -51,7 +51,7 @@
     </head>
     <!-- <body class="container-fluid"> -->
     <body>
-        <h5>Cadastre sua despesas</h5>
+        <h5>Cadastre suas despesas</h5>
         <div class="">
            
             <div id="sidebar" class="col-lg-3" style="float:left">
@@ -79,23 +79,24 @@
                     </div>
 
                 </form>
-                <button id="btn_formulario" class="btn btn-success" onclick="cadastrtaDespesa()">Cadastrar</button>
+                <button id="btn_formulario" class="btn btn-success" onclick="cadastraDespesa()">Cadastrar</button>
 
             </div>
             <div class="col-lg-9" style="float:right">
-            <div class="col-12">
+            <!-- <div class="col-12">
                 <button data-target="#modalEdit" onclick="editarDespesa()" class="btn">EDIT</button>
-                <button onclick="deleteDespesa()" class="btn">DEL</button>
-            </div>
+                <button class="excluirReg btn btn-default btn-sm" onclick="deleteDespesa()">DEL</button>
+            </div> -->
             <table id="tableDespesas" data-toggle="table">
                 <thead>
                     <tr>
-                        <th data-field="chkbx" data-checkbox="true"></th>
+                        <!-- <th data-field="chkbx" data-checkbox="true"></th> -->
                         <th data-field="descricao">Descrição</th>
                         <th data-field="vlr_total">Valor Total</th>
                         <th data-field="vlr_mensal">Valor Mensal</th>
                         <th data-field="qtd_parcelas">QTD Parcelas</th>
                         <th data-field="vencimento">Vencimento</th>
+                        <th data-formatter="functionAcao">AÇÃO</th>
                     </tr>
                 </thead>
             </table>
@@ -103,33 +104,69 @@
         
         </div>
 
-        <!-- INICIO MODAIS -->
-        
-        <div id="modalEdit" class="modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Editar</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-                </div>
+
+  <!-- modla editar -->
+  <div id="modalEdit" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5>Editar</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="">
+          <p>Nome</p>
+            <input type="text" class="form-control" name="edit-despesa-descricao">
+            <p>Valor Total</p>
+            <input type="text" class="form-control" name="edit-despesa-vlrTotal">
+            <p>Valor Mensal</p>
+            <input type="text" class="form-control" name="edit-despesa-vlrMensal">
+            <p>Quantidade de Parcelas</p>
+            <input type="text" class="form-control" name="edit-despesa-qtd_parcelas">
+            <p>Venvimento</p>
+            <input type="text" class="form-control" name="edit-despesa-vcto">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" onclick="editarDespesa()" class="btn btn-primary">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- fim modal editar-->
+
+  
+<!-- Modal Delete -->
+
+
+<div class="modal" id="myModal" role="dialog">
+    <div class="modal-dialog" role="document"></div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dissmiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Confirmar</h4>
+            </div>
+            <div class="modal-body">
+                <p class="sucess-message">Tem certeza de que quer excluir o registro?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success delete-confirm" type="button">Sim</button>
+                <button class="btn btn-default" type="button" data-dismiss="modal">Não</button>
             </div>
         </div>
-        
-        <!-- FIM MODAIS -->
+    </div>
+</div>
 
-        
+<!-- fim modal delete-->
+
+ <!-- FIM MODAIS -->
+  
         <!-- JQuery 3.3.1 e o recomendado pela versao Boostrap 4.1 -->
-        <!-- <script> src="libs/JQuery/jquery-3.3.1.slim.min.js"</script> -->
+        <script> src="libs/JQuery/jquery-3.3.1.slim.min.js"</script>
         <script> src="libs/JQuery/jquery-3.4.1.min.js"</script>
         <script> src="libs/PopperJS/popper.min.js"</script> <!--Bootstrap Popper Js -->
         <script> src="libs/Bootstrap/bootstrap.min.js"</script> <!--Bootstrap Js --> 
@@ -140,10 +177,15 @@
 
             // $("#form_vlrTotal").mask('0,00')
             // $("#form_vlrMensal").mask('999,99')
-            // $("#form_vencimento").mask('99/99/9999')
+            // $("#form_vencimento").mask('9999/99/99')
             // fim de setagens padrao
 
-            function cadastrtaDespesa()
+            function functionAcao(campo, obj, indice)
+    {
+      return `<button onclick="modalEditar(${obj.id})" class="btn">EDIT</button> <button onclick="deleteDespesa(${obj.id})" class="btn">DEL</button>`;
+    }
+            
+            function cadastraDespesa()
             {
                 let formulario = $("#formCadastroDespesa")[0];
                 let formData = new FormData(formulario);
@@ -172,18 +214,31 @@
                 })
             }
 
-            function editarDespesa(){
+            function modalEditar(id){
+              
 
-                let formulario = $("#formCadastroDespesa")[0];
-                let formData = new FormData(formulario);
-                let desc           = $("#form_descricao").val()
-                let vlrTotal       = $("#form_vlrTotal").val()
-                let vlrMensal      = $("#form_vlrMensal").val()
-                let qtdParcelas    = $("#form_qtdParcelas").val()
-                let vencimento     = $("#form_vencimento").val()
-                $.ajax({
+            $.get('http://localhost/crud_basico/controller/controllerIndexDespesabyId.php?id='+id, (result) => {
+                const json = JSON.parse(result);
+                if(json.despesa == null) {
+                    alert('Despesa não encontrada');
+                    return;
+                }
+                const despesa = json.despesa;
+                console.log(despesa)
+                $('input[name=edit-despesa-descricao]').val(despesa.descricao);
+                $('input[name=edit-despesa-vlrTotal]').val(despesa.vlr_total);
+                $('input[name=edit-despesa-vlrMensal]').val(despesa.vlr_mensal);
+                $('input[name=edit-despesa-vcto]').val(despesa.vencimento);
+                $('input[name=edit-despesa-qtd_parcelas]').val(despesa.qtd_parcelas);
+                $('#modalEdit').show();
+            });
+        }
+            
+            function editarDespesa(id)
+            {
+                     $.ajax({
                     url: "controller/controllerIndexUpdate.php",
-                    data: formData,
+                    data: id,
                     cache: false,
                     contentType: false,
                     processData: false,
@@ -199,12 +254,16 @@
                         console.log("tem alguma coisa errada"+desc + "nErro:" + err);
                     }
                 })
+            
+            }
+
+            function deleteDespesa(id){
+            //     alert(id)
+                console.log(id);
+
 
             }
 
-            function deleteDespesa(){
-
-            }
         </script> 
     </body>
     </html>

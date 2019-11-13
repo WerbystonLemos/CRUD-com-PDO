@@ -21,6 +21,22 @@ class DespesaDAO
         $res->execute();
     
     }
+
+    public function getDepesa($id) {
+        $conexao = new conectionFactory();
+        $aux = $conexao->Conection();
+        $query = $aux->prepare("SELECT * FROM despesas WHERE id = ? LIMIT 1");
+        $query->execute([$id]);
+        $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
+        $despesa = null;
+        if(count($resultado) > 0) {
+            $despesa = $resultado[0];
+        }
+
+        echo json_encode(['despesa' => $despesa]);
+    }
+
+
     public function despesaReload()
     {
         $conexao = new conectionFactory();
@@ -51,10 +67,11 @@ class DespesaDAO
     }
     public function despesaDelete($objTO)
     {
+        $resultado = 0 ;
         $conexao = new conectionFactory();
         $aux = $conexao->Conection();
         $query = $aux->prepare("DELETE FROM despesas WHERE id = :id");
-        
+        // $q-> bindParam ( ': id' , $ id, PDO :: PARAM_INT ) ;
         $id = $objTO->getId();
         
         $query->execute();

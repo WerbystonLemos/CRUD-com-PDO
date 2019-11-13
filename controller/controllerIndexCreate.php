@@ -21,10 +21,6 @@ try
 
     $objDespesasCRUD_DAO = new DespesaDAO();
     $objDespesasCRUD_DAO->despesaCreate($objDespesa);
-    // $objDespesasCRUD_DAO->despesaReload($objDespesa);
-    // parei no teste de UPDATE
-    // $objDespesasCRUD_DAO->despesaUpdate($objDespesa);
-    // $objDespesasCRUD_DAO->despesaDelete($objDespesa);
 
 }
 catch(Exception $e)

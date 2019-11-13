@@ -19,6 +19,7 @@ try
     $objDespesa->setVlrMensal($arrayDeVAlores['vlrMensal']);
     $objDespesa->setQtdParcelas($arrayDeVAlores['qtdParcelas']);
     $objDespesa->setVencimento($arrayDeVAlores['vcto']);
+    
 
     $objDespesasCRUD_DAO = new DespesaDAO();
     $objDespesasCRUD_DAO->despesaUpdate($objDespesa);
