@@ -83,10 +83,6 @@
 
             </div>
             <div class="col-lg-9" style="float:right">
-            <!-- <div class="col-12">
-                <button data-target="#modalEdit" onclick="editarDespesa()" class="btn">EDIT</button>
-                <button class="excluirReg btn btn-default btn-sm" onclick="deleteDespesa()">DEL</button>
-            </div> -->
             <table id="tableDespesas" data-toggle="table">
                 <thead>
                     <tr>
@@ -116,7 +112,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="">
+          <form action="" id="formEdit">
           <p>Nome</p>
             <input type="text" class="form-control" name="edit-despesa-descricao">
             <p>Valor Total</p>
@@ -142,19 +138,19 @@
 <!-- Modal Delete -->
 
 
-<div class="modal" id="myModal" role="dialog">
+<div class="modal" id="ModalDel" role="dialog">
     <div class="modal-dialog" role="document"></div>
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dissmiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Confirmar</h4>
+               
             </div>
             <div class="modal-body">
                 <p class="sucess-message">Tem certeza de que quer excluir o registro?</p>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success delete-confirm" type="button">Sim</button>
+                <button class="btn btn-success delete-confirm" onclick="deleteDespesa(id)" type="button">Sim</button>
                 <button class="btn btn-default" type="button" data-dismiss="modal">Não</button>
             </div>
         </div>
@@ -182,7 +178,7 @@
 
             function functionAcao(campo, obj, indice)
     {
-      return `<button onclick="modalEditar(${obj.id})" class="btn">EDIT</button> <button onclick="deleteDespesa(${obj.id})" class="btn">DEL</button>`;
+      return `<button onclick="modalEditar(${obj.id})" class="btn">EDIT</button> <button onclick="modalDel(${obj.id})" class="btn">DEL</button>`;
     }
             
             function cadastraDespesa()
@@ -257,13 +253,44 @@
             
             }
 
-            function deleteDespesa(id){
-            //     alert(id)
+            function modalDel(id){
+           
                 console.log(id);
+                
+                $.get('http://localhost/crud_basico/controller/controllerIndexDespesabyId.php?id='+id, (result) => {
+                const json = JSON.parse(result);
+                if(json.despesa == null) {
+                    alert('Despesa não encontrada');
+                    return;
+                }
+                const despesa = json.despesa;
+                console.log(despesa)
+                $('#ModalDel').show();
 
-
+            })
             }
 
+            function deleteDespesa(id){
+                $.ajax({
+                    url: "controller/controllerIndexDelete.php",
+                    data: id,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    success: function(ret){
+                       
+                        console.log("registro atualizado com sucesso!")
+                    },
+                    error: function(xhr, desc, err)
+                    {
+                        console.log(xhr)
+                        console.log("tem alguma coisa errada"+desc + "nErro:" + err);
+                    }
+                })
+
+            }
         </script> 
     </body>
     </html>

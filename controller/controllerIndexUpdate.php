@@ -4,12 +4,12 @@ try
     require_once("../modal/DespesasTO.php");
     require_once("../modal/DespesaDAO.php");
 
-    $id          = $_REQUEST['form_id'];
-    $descricao   = $_REQUEST['form_descricao'];
-    $vlrTotal    = $_REQUEST['form_vlrTotal'];
-    $vlrMensal   = $_REQUEST['form_vlrMensal'];
-    $qtdParcelas = $_REQUEST['form_qtdParcelas'];
-    $vcto        = $_REQUEST['form_vencimento'];
+    
+    $descricao   = $_REQUEST['descricao'];
+    $vlrTotal    = $_REQUEST['vlrTotal'];
+    $vlrMensal   = $_REQUEST['vlrMensal'];
+    $qtdParcelas = $_REQUEST['qtdParcelas'];
+    $vcto        = $_REQUEST['vencimento'];
 
     $arrayDeVAlores = ['descricao' => $descricao, 'vlrTotal' => $vlrTotal, 'vlrMensal' => $vlrMensal, 'qtdParcelas' => $qtdParcelas, 'vcto' => $vcto];
 
