@@ -144,6 +144,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+            <h5>Excluir</h5>
              <span class="id" style="display: none;"></span>
                 <button type="button" class="close" data-dissmiss="modal" aria-hidden="true">&times;</button>
                
