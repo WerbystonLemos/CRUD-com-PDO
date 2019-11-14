@@ -4,23 +4,21 @@ try
     require_once("../modal/DespesasTO.php");
     require_once("../modal/DespesaDAO.php");
 
-    $descricao   = $_REQUEST['form_descricao'];
-    $vlrTotal    = $_REQUEST['form_vlrTotal'];
-    $vlrMensal   = $_REQUEST['form_vlrMensal'];
-    $qtdParcelas = $_REQUEST['form_qtdParcelas'];
-    $vcto        = $_REQUEST['form_vencimento'];
+    // $descricao   = $_REQUEST['form_descricao'];
+    // $vlrTotal    = $_REQUEST['form_vlrTotal'];
+    // $vlrMensal   = $_REQUEST['form_vlrMensal'];
+    // $qtdParcelas = $_REQUEST['form_qtdParcelas'];
+    // $vcto        = $_REQUEST['form_vencimento'];
+    
+    $id = $_POST['id'];
 
-    $arrayDeVAlores = ['descricao' => $descricao, 'vlrTotal' => $vlrTotal, 'vlrMensal' => $vlrMensal, 'qtdParcelas' => $qtdParcelas, 'vcto' => $vcto];
-
+    $arrayDeVAlores = ['id' => $id];
+   
     $objDespesa = new DespesasTO();
-    $objDespesa->setDescricao($arrayDeVAlores['descricao']);
-    $objDespesa->setVlrTotal($arrayDeVAlores['vlrTotal']);
-    $objDespesa->setVlrMensal($arrayDeVAlores['vlrMensal']);
-    $objDespesa->setQtdParcelas($arrayDeVAlores['qtdParcelas']);
-    $objDespesa->setVencimento($arrayDeVAlores['vcto']);
-
+    $objDespesa->setId($id);
+  
     $objDespesasCRUD_DAO = new DespesaDAO();
-    $objDespesasCRUD_DAO->despesaCreate($objDespesa);
+    $objDespesasCRUD_DAO->despesaDelete($objDespesa);
 
 
 }

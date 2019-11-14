@@ -7,6 +7,7 @@ class DespesaDAO
         $conexao = new conectionFactory();
         $aux = $conexao->Conection();
         $res = $aux->prepare("INSERT INTO despesas(descricao, vlr_total, vlr_mensal, qtd_parcelas, vencimento) VALUES (:descr, :vlr_tot, :vlr_mnsl, :prcls, :vcto)");
+        
         $descr      = $objTO->getDescricao();
         $vlr_tot    = $objTO->getVlrTotal();
         $vlr_mnsl   = $objTO->getVlrMensal();
@@ -52,19 +53,22 @@ class DespesaDAO
         $aux = $conexao->Conection();
         $query = $aux->prepare("UPDATE despesas SET descricao = :descricao, vlr_total = :vlr_total, vlr_mensal=:vlr_mensal, qtd_parcelas=:parcelas, vencimento=:vcto WHERE id = :id");
 
-        $descricao   = $objTO()->getDescricao();
-        $vlr_total   = $objTO()->getVlrTotal();
-        $vlr_mensal  = $objTO()->getVlrMensal();
-        $parcelas    = $objTO()->getQtdParcelas();
-        $vencimentos = $objTO()->getVencimento();
+        $descricao   = $objTO->getDescricao();
+        $vlr_total   = $objTO->getVlrTotal();
+        $vlr_mensal  = $objTO->getVlrMensal();
+        $parcelas    = $objTO->getQtdParcelas();
+        $vencimentos = $objTO->getVencimento();
+        $id = $objTO->getId();
 
         $query->bindValue("descricao", $descricao);
         $query->bindValue("vlr_total", $vlr_total);
         $query->bindValue(":vlr_mensal", $vlr_mensal);
         $query->bindValue(":parcelas", $parcelas);
         $query->bindValue(":vcto", $vencimentos);
+        $query->bindValue(":id", $id);
         $query->execute();
     }
+
     public function despesaDelete($objTO)
     {
         $resultado = 0 ;
@@ -72,9 +76,12 @@ class DespesaDAO
         $aux = $conexao->Conection();
         $query = $aux->prepare("DELETE FROM despesas WHERE id = :id");
         // $q-> bindParam ( ': id' , $ id, PDO :: PARAM_INT ) ;
+        
         $id = $objTO->getId();
+        $query->bindValue(":id", $id);
         
         $query->execute();
+       
 
     }
 }

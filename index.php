@@ -107,6 +107,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5>Editar</h5>
+          <span class="id-despesa" style="display: none;"></span>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -143,6 +144,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+             <span class="id" style="display: none;"></span>
                 <button type="button" class="close" data-dissmiss="modal" aria-hidden="true">&times;</button>
                
             </div>
@@ -150,7 +152,7 @@
                 <p class="sucess-message">Tem certeza de que quer excluir o registro?</p>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success delete-confirm" onclick="deleteDespesa(id)" type="button">Sim</button>
+                <button class="btn btn-success delete-confirm" onclick="deleteDespesa()" type="button">Sim</button>
                 <button class="btn btn-default" type="button" data-dismiss="modal">Não</button>
             </div>
         </div>
@@ -173,12 +175,12 @@
 
             // $("#form_vlrTotal").mask('0,00')
             // $("#form_vlrMensal").mask('999,99')
-            // $("#form_vencimento").mask('9999/99/99')
+            $("#form_vencimento").mask('9999/99/99')
             // fim de setagens padrao
 
             function functionAcao(campo, obj, indice)
     {
-      return `<button onclick="modalEditar(${obj.id})" class="btn">EDIT</button> <button onclick="modalDel(${obj.id})" class="btn">DEL</button>`;
+      return `<button onclick="modalEditar(${obj.id})" class="btn">EDITAR</button> <button onclick="modalDel(${obj.id})" class="btn">EXCLUIR</button>`;
     }
             
             function cadastraDespesa()
@@ -222,34 +224,35 @@
                 const despesa = json.despesa;
                 console.log(despesa)
                 $('input[name=edit-despesa-descricao]').val(despesa.descricao);
+                $('.id-despesa').html(id);
                 $('input[name=edit-despesa-vlrTotal]').val(despesa.vlr_total);
                 $('input[name=edit-despesa-vlrMensal]').val(despesa.vlr_mensal);
-                $('input[name=edit-despesa-vcto]').val(despesa.vencimento);
                 $('input[name=edit-despesa-qtd_parcelas]').val(despesa.qtd_parcelas);
+                $('input[name=edit-despesa-vcto]').val(despesa.vencimento);
+               
                 $('#modalEdit').show();
             });
         }
             
-            function editarDespesa(id)
+            function editarDespesa()
             {
-                     $.ajax({
-                    url: "controller/controllerIndexUpdate.php",
-                    data: id,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    type: 'POST',
-                    dataType: 'JSON',
-                    success: function(ret){
-                        // console.log(ret)
-                        console.log("registro atualizado com sucesso!")
-                    },
-                    error: function(xhr, desc, err)
-                    {
-                        console.log(xhr)
-                        console.log("tem alguma coisa errada"+desc + "nErro:" + err);
-                    }
-                })
+                let id = $('.id-despesa').html();
+                let descricao           = $("input[name=edit-despesa-descricao]").val()
+                let vlrTotal       = $("input[name=edit-despesa-vlrTotal]").val()
+                let vlrMensal      = $("input[name=edit-despesa-vlrMensal]").val()
+                let qtdParcelas     = $("input[name=edit-despesa-qtd_parcelas]").val()
+                let vcto    = $("input[name=edit-despesa-vcto]").val()
+                
+                $.post('controller/controllerIndexUpdate.php', {
+                    'edit-despesa-descricao': descricao,
+                    'edit-despesa-vlrTotal': vlrTotal,
+                    'edit-despesa-vlrMensal': vlrMensal,
+                    'edit-despesa-qtd_parcelas': qtdParcelas,
+                    'edit-despesa-vcto': vcto,
+                    'id': id
+                }, function(r){
+                    console.log(r);
+                });
             
             }
 
@@ -263,32 +266,22 @@
                     alert('Despesa não encontrada');
                     return;
                 }
+                $('.id').html(id);
                 const despesa = json.despesa;
                 console.log(despesa)
                 $('#ModalDel').show();
 
             })
+            
             }
 
-            function deleteDespesa(id){
-                $.ajax({
-                    url: "controller/controllerIndexDelete.php",
-                    data: id,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    type: 'POST',
-                    dataType: 'JSON',
-                    success: function(ret){
-                       
-                        console.log("registro atualizado com sucesso!")
-                    },
-                    error: function(xhr, desc, err)
-                    {
-                        console.log(xhr)
-                        console.log("tem alguma coisa errada"+desc + "nErro:" + err);
-                    }
-                })
+            function deleteDespesa(){
+                let id = $('.id').html();
+                $.post('controller/controllerIndexDelete.php', {
+                    'id': id
+                }, function(r){
+                    console.log(r);
+                });
 
             }
         </script> 

@@ -5,11 +5,14 @@ try
     require_once("../modal/DespesaDAO.php");
 
     
-    $descricao   = $_REQUEST['descricao'];
-    $vlrTotal    = $_REQUEST['vlrTotal'];
-    $vlrMensal   = $_REQUEST['vlrMensal'];
-    $qtdParcelas = $_REQUEST['qtdParcelas'];
-    $vcto        = $_REQUEST['vencimento'];
+    var_dump($_POST);
+    
+    $descricao = $_POST['edit-despesa-descricao'];
+    $vlrTotal = $_POST['edit-despesa-vlrTotal'];
+    $vlrMensal = $_POST['edit-despesa-vlrMensal'];
+    $qtdParcelas = $_POST['edit-despesa-qtd_parcelas'];
+    $vcto = $_POST['edit-despesa-vcto'];
+    $id = $_POST['id'];
 
     $arrayDeVAlores = ['descricao' => $descricao, 'vlrTotal' => $vlrTotal, 'vlrMensal' => $vlrMensal, 'qtdParcelas' => $qtdParcelas, 'vcto' => $vcto];
 
@@ -19,7 +22,7 @@ try
     $objDespesa->setVlrMensal($arrayDeVAlores['vlrMensal']);
     $objDespesa->setQtdParcelas($arrayDeVAlores['qtdParcelas']);
     $objDespesa->setVencimento($arrayDeVAlores['vcto']);
-    
+    $objDespesa->setId($id);
 
     $objDespesasCRUD_DAO = new DespesaDAO();
     $objDespesasCRUD_DAO->despesaUpdate($objDespesa);
