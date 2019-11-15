@@ -42,7 +42,7 @@ class DespesaDAO
     {
         $conexao = new conectionFactory();
         $aux = $conexao->Conection();
-        $query = $aux->prepare("SELECT * FROM despesas");
+        $query = $aux->prepare("SELECT * FROM despesas ORDER BY id DESC");
         $query->execute();
         $resultado = $query->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($resultado);

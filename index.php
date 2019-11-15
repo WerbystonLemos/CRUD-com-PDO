@@ -12,16 +12,15 @@
         <!-- CSS BootstrapTable -->
         <link rel="stylesheet" href="libs/BootstrapTable/bootstrap-table.min.css">
 
-        <!-- <script> src="libs/JQuery/jquery-3.3.1.slim.min.js"</script> -->
+        <!-- jquery -->
         <script src="libs/JQuery/jquery-3.4.1.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script><!-- mask -->
-        <link href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css" rel="stylesheet">
+        <!--Bootstrap Js --> 
+        <script src="libs/Bootstrap/bootstrap.min.js"></script>
+        <!--Bootstrap Popper Js -->
+        <script> src="libs/PopperJS/popper.min.js"</script>
 
-        
-        <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
-
-        <script> src="libs/BootstrapTable/bootstrap-table.min.js"</script><!-- bootstraptable -->
+        <!-- mask -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
         <style>
             h5
@@ -101,190 +100,192 @@
         </div>
 
 
-  <!-- modla editar -->
-  <div id="modalEdit" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5>Editar</h5>
-          <span class="id-despesa" style="display: none;"></span>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="" id="formEdit">
-          <p>Nome</p>
-            <input type="text" class="form-control" name="edit-despesa-descricao">
-            <p>Valor Total</p>
-            <input type="text" class="form-control" name="edit-despesa-vlrTotal">
-            <p>Valor Mensal</p>
-            <input type="text" class="form-control" name="edit-despesa-vlrMensal">
-            <p>Quantidade de Parcelas</p>
-            <input type="text" class="form-control" name="edit-despesa-qtd_parcelas">
-            <p>Venvimento</p>
-            <input type="text" class="form-control" name="edit-despesa-vcto">
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" onclick="editarDespesa()" class="btn btn-primary">Ok</button>
-        </div>
-      </div>
-    </div>
-  </div>
-<!-- fim modal editar-->
-
-  
-<!-- Modal Delete -->
-
-
-<div class="modal" id="ModalDel" role="dialog">
-    <div class="modal-dialog" role="document"></div>
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5>Excluir</h5>
-             <span class="id" style="display: none;"></span>
-                <button type="button" class="close" data-dissmiss="modal" aria-hidden="true">&times;</button>
-               
+        <!-- modla editar -->
+        <div id="modalEdit" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5>Editar</h5>
+                <span class="id-despesa" style="display: none;"></span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                <form action="" id="formEdit">
+                <p>Nome</p>
+                    <input type="text" class="form-control" name="edit-despesa-descricao">
+                    <p>Valor Total</p>
+                    <input type="text" class="form-control" name="edit-despesa-vlrTotal">
+                    <p>Valor Mensal</p>
+                    <input type="text" class="form-control" name="edit-despesa-vlrMensal">
+                    <p>Quantidade de Parcelas</p>
+                    <input type="text" class="form-control" name="edit-despesa-qtd_parcelas">
+                    <p>Venvimento</p>
+                    <input type="text" class="form-control" name="edit-despesa-vcto">
+                </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="editarDespesa()" class="btn btn-primary">Ok</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <p class="sucess-message">Tem certeza de que quer excluir o registro?</p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-success delete-confirm" onclick="deleteDespesa()" type="button">Sim</button>
-                <button class="btn btn-default" type="button" data-dismiss="modal">Não</button>
             </div>
         </div>
-    </div>
-</div>
+        <!-- fim modal editar-->
+        
+        <!-- Modal Delete -->
+            <div class="modal" id="ModalDel" role="dialog">
+                <div class="modal-dialog" role="document"></div>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5>Excluir</h5>
+                        <span class="id" style="display: none;"></span>
+                            <button type="button" class="close" data-dissmiss="modal" aria-hidden="true">&times;</button>
+                        
+                        </div>
+                        <div class="modal-body">
+                            <p class="sucess-message">Tem certeza de que quer excluir o registro?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-success delete-confirm" onclick="deleteDespesa()" type="button">Sim</button>
+                            <button class="btn btn-default" type="button" data-dismiss="modal">Não</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- fim modal delete-->
+        <!-- FIM MODAIS -->
 
-<!-- fim modal delete-->
 
- <!-- FIM MODAIS -->
-  
-        <!-- JQuery 3.3.1 e o recomendado pela versao Boostrap 4.1 -->
-        <script> src="libs/JQuery/jquery-3.3.1.slim.min.js"</script>
-        <script> src="libs/JQuery/jquery-3.4.1.min.js"</script>
-        <script> src="libs/PopperJS/popper.min.js"</script> <!--Bootstrap Popper Js -->
-        <script> src="libs/Bootstrap/bootstrap.min.js"</script> <!--Bootstrap Js --> 
-        <script>
-            // inicio de setagens padrao
+    <script src="libs/JQuery/jquery-3.4.1.min.js"></script>
+    <script src="libs/Bootstrap/bootstrap.min.js"></script> 
+    <script src="libs/PopperJS/popper.min.js"></script> 
+    
+    <!-- bootstrapTable -->
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+    
+    <!-- api mask -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
+    <script>
+        // $("#tableDespesas").bootstrapTable();
+        // inicio de setagens padrao
+        function carregaDadosTabela()
+        {
             $("#tableDespesas").bootstrapTable();
             $("#tableDespesas").bootstrapTable("refresh",{ url:'controller/controllerIndexReload.php' });
-
-            // $("#form_vlrTotal").mask('0,00')
-            // $("#form_vlrMensal").mask('999,99')
-            $("#form_vencimento").mask('9999/99/99')
-            // fim de setagens padrao
-
-            function functionAcao(campo, obj, indice)
-    {
-      return `<button onclick="modalEditar(${obj.id})" class="btn">EDITAR</button> <button onclick="modalDel(${obj.id})" class="btn">EXCLUIR</button>`;
-    }
-            
-            function cadastraDespesa()
-            {
-                let formulario = $("#formCadastroDespesa")[0];
-                let formData = new FormData(formulario);
-                let desc           = $("#form_descricao").val()
-                let vlrTotal       = $("#form_vlrTotal").val()
-                let vlrMensal      = $("#form_vlrMensal").val()
-                let qtdParcelas    = $("#form_qtdParcelas").val()
-                let vencimento     = $("#form_vencimento").val()
-                $.ajax({
-                    url: "controller/controllerIndexCreate.php",
-                    data: formData,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    type: 'POST',
-                    dataType: 'JSON',
-                    success: function(ret){
-                        // console.log(ret)
-                        console.log("registro feito com sucesso!")
-                    },
-                    error: function(xhr, desc, err)
-                    {
-                        console.log(xhr)
-                        console.log("tem alguma coisa errada"+desc + "nErro:" + err);
-                    }
-                })
-            }
-
-            function modalEditar(id){
-              
-
-            $.get('http://localhost/crud_basico/controller/controllerIndexDespesabyId.php?id='+id, (result) => {
-                const json = JSON.parse(result);
-                if(json.despesa == null) {
-                    alert('Despesa não encontrada');
-                    return;
-                }
-                const despesa = json.despesa;
-                console.log(despesa)
-                $('input[name=edit-despesa-descricao]').val(despesa.descricao);
-                $('.id-despesa').html(id);
-                $('input[name=edit-despesa-vlrTotal]').val(despesa.vlr_total);
-                $('input[name=edit-despesa-vlrMensal]').val(despesa.vlr_mensal);
-                $('input[name=edit-despesa-qtd_parcelas]').val(despesa.qtd_parcelas);
-                $('input[name=edit-despesa-vcto]').val(despesa.vencimento);
-               
-                $('#modalEdit').show();
-            });
         }
-            
-            function editarDespesa()
-            {
-                let id = $('.id-despesa').html();
-                let descricao           = $("input[name=edit-despesa-descricao]").val()
-                let vlrTotal       = $("input[name=edit-despesa-vlrTotal]").val()
-                let vlrMensal      = $("input[name=edit-despesa-vlrMensal]").val()
-                let qtdParcelas     = $("input[name=edit-despesa-qtd_parcelas]").val()
-                let vcto    = $("input[name=edit-despesa-vcto]").val()
-                
-                $.post('controller/controllerIndexUpdate.php', {
-                    'edit-despesa-descricao': descricao,
-                    'edit-despesa-vlrTotal': vlrTotal,
-                    'edit-despesa-vlrMensal': vlrMensal,
-                    'edit-despesa-qtd_parcelas': qtdParcelas,
-                    'edit-despesa-vcto': vcto,
-                    'id': id
-                }, function(r){
-                    console.log(r);
-                });
-            
-            }
+        carregaDadosTabela();
 
-            function modalDel(id){
-           
-                console.log(id);
-                
-                $.get('http://localhost/crud_basico/controller/controllerIndexDespesabyId.php?id='+id, (result) => {
-                const json = JSON.parse(result);
-                if(json.despesa == null) {
-                    alert('Despesa não encontrada');
-                    return;
+        // $("#form_vlrTotal").mask('0,00')
+        // $("#form_vlrMensal").mask('999,99')
+        $("#form_vencimento").mask('9999/99/99')
+        // fim de setagens padrao
+
+        function functionAcao(campo, obj, indice)
+        {
+            return `<button onclick="modalEditar(${obj.id})" class="btn">EDITAR</button> <button onclick="modalDel(${obj.id})" class="btn">EXCLUIR</button>`;
+        }
+        
+        function cadastraDespesa()
+        {
+            let formulario = $("#formCadastroDespesa")[0];
+            let formData = new FormData(formulario);
+            $.ajax({
+                url: "controller/controllerIndexCreate.php",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                // dataType: 'JSON', a gente especificava que a resp vinha em JSON mas o PHP devolviaa um array
+                success: function(ret){
+                    console.log(ret)
+                    carregaDadosTabela()
+                    alert("registro feito com sucesso!")
+                },
+                error: function(err)
+                {
+                    alert("Erro na comunicação com o BD!")
+                    console.log(err)
                 }
-                $('.id').html(id);
-                const despesa = json.despesa;
-                console.log(despesa)
-                $('#ModalDel').show();
-
             })
+        }
+
+        function modalEditar(id)
+        {
+            $("#modalEdit").modal("show");
+            // $.get('http://localhost/crud_basico/controller/controllerIndexDespesabyId.php?id='+id, (result) => {
+            // const json = JSON.parse(result);
+            // if(json.despesa == null) {
+            //     alert('Despesa não encontrada');
+            //     return;
+            // }
+            // const despesa = json.despesa;
+            // console.log(despesa)
+            // $('input[name=edit-despesa-descricao]').val(despesa.descricao);
+            // $('.id-despesa').html(id);
+            // $('input[name=edit-despesa-vlrTotal]').val(despesa.vlr_total);
+            // $('input[name=edit-despesa-vlrMensal]').val(despesa.vlr_mensal);
+            // $('input[name=edit-despesa-qtd_parcelas]').val(despesa.qtd_parcelas);
+            // $('input[name=edit-despesa-vcto]').val(despesa.vencimento);
             
-            }
+            // $('#modalEdit').show();
+        // });
+        }
+        
+        function editarDespesa()
+        {
+            let id = $('.id-despesa').html();
+            let descricao           = $("input[name=edit-despesa-descricao]").val()
+            let vlrTotal       = $("input[name=edit-despesa-vlrTotal]").val()
+            let vlrMensal      = $("input[name=edit-despesa-vlrMensal]").val()
+            let qtdParcelas     = $("input[name=edit-despesa-qtd_parcelas]").val()
+            let vcto    = $("input[name=edit-despesa-vcto]").val()
+            
+            $.post('controller/controllerIndexUpdate.php', {
+                'edit-despesa-descricao': descricao,
+                'edit-despesa-vlrTotal': vlrTotal,
+                'edit-despesa-vlrMensal': vlrMensal,
+                'edit-despesa-qtd_parcelas': qtdParcelas,
+                'edit-despesa-vcto': vcto,
+                'id': id
+            }, function(r){
+                console.log(r);
+            });
+        
+        }
 
-            function deleteDespesa(){
-                let id = $('.id').html();
-                $.post('controller/controllerIndexDelete.php', {
-                    'id': id
-                }, function(r){
-                    console.log(r);
-                });
-
+        function modalDel(id){
+        
+            console.log(id);
+            
+            $.get('http://localhost/crud_basico/controller/controllerIndexDespesabyId.php?id='+id, (result) => {
+            const json = JSON.parse(result);
+            if(json.despesa == null) {
+                alert('Despesa não encontrada');
+                return;
             }
-        </script> 
+            $('.id').html(id);
+            const despesa = json.despesa;
+            console.log(despesa)
+            $('#ModalDel').show();
+
+        })
+        
+        }
+
+        function deleteDespesa(){
+            let id = $('.id').html();
+            $.post('controller/controllerIndexDelete.php', {
+                'id': id
+            }, function(r){
+                console.log(r);
+            });
+
+        }
+    </script> 
     </body>
     </html>
