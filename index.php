@@ -22,6 +22,10 @@
         <!-- mask -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
+        <!-- bootbox -->
+        <script scr="libs/Bootbox/bootbox.locales.min.js"></script>
+        <script src="libs/Bootbox/bootbox.locales.min.js"></script>
+
         <style>
             h5
             {
@@ -169,6 +173,10 @@
     <!-- api mask -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
+    <!-- bootbox -->
+    <script scr="libs/Bootbox/bootbox.locales.min.js"></script>
+    <script src="libs/Bootbox/bootbox.locales.min.js"></script>
+
     <script>
         // $("#tableDespesas").bootstrapTable();
         // inicio de setagens padrao
@@ -260,20 +268,20 @@
 
         function modalDel(id){
         
-            console.log(id);
+            // console.log(id);
             
-            $.get('http://localhost/crud_basico/controller/controllerIndexDespesabyId.php?id='+id, (result) => {
-            const json = JSON.parse(result);
-            if(json.despesa == null) {
-                alert('Despesa não encontrada');
-                return;
-            }
-            $('.id').html(id);
-            const despesa = json.despesa;
-            console.log(despesa)
-            $('#ModalDel').show();
-
-        })
+            // $.get('http://localhost/crud_basico/controller/controllerIndexDespesabyId.php?id='+id, (result) => {
+            // const json = JSON.parse(result);
+            // if(json.despesa == null) {
+            //     alert('Despesa não encontrada');
+            //     return;
+            // }
+            // $('.id').html(id);
+            // const despesa = json.despesa;
+            // console.log(despesa)
+            // $('#ModalDel').show();
+        //})
+        bootbox.alert("id: "+id);
         
         }
 
