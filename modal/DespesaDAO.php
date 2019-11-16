@@ -37,7 +37,6 @@ class DespesaDAO
         echo json_encode(['despesa' => $despesa]);
     }
 
-
     public function despesaReload()
     {
         $conexao = new conectionFactory();
@@ -69,7 +68,7 @@ class DespesaDAO
         $query->execute();
     }
 
-    public function despesaDelete($objTO)
+    public function despesaDelete($id)
     {
         $resultado = 0 ;
         $conexao = new conectionFactory();
@@ -77,11 +76,10 @@ class DespesaDAO
         $query = $aux->prepare("DELETE FROM despesas WHERE id = :id");
         // $q-> bindParam ( ': id' , $ id, PDO :: PARAM_INT ) ;
         
-        $id = $objTO->getId();
-        $query->bindValue(":id", $id);
+        $idDAO = $id;
+        $query->bindValue(":id", $idDAO);
         
         $query->execute();
-       
 
     }
 }

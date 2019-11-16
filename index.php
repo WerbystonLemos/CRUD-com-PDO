@@ -23,8 +23,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
         <!-- bootbox -->
-        <script scr="libs/Bootbox/bootbox.locales.min.js"></script>
-        <script src="libs/Bootbox/bootbox.locales.min.js"></script>
+        <!-- <script scr="libs/Bootbox/bootbox.locales.min.js"></script>
+        <script src="libs/Bootbox/bootbox.locales.min.js"></script> -->
 
         <style>
             h5
@@ -117,55 +117,33 @@
                 </div>
                 <div class="modal-body">
                 <form action="" id="formEdit">
-                <p>Nome</p>
-                    <input type="text" class="form-control" name="edit-despesa-descricao">
+                    <input type="hidden" id="formEdit_id" name="formEdit_id">
+                    <p>Nome</p>
+                    <input type="text" class="form-control" id="edit-despesa-descricao" name="edit-despesa-descricao">
                     <p>Valor Total</p>
-                    <input type="text" class="form-control" name="edit-despesa-vlrTotal">
+                    <input type="text" class="form-control" id="edit-despesa-vlrTotal" name="edit-despesa-vlrTotal">
                     <p>Valor Mensal</p>
-                    <input type="text" class="form-control" name="edit-despesa-vlrMensal">
+                    <input type="text" class="form-control" id="edit-despesa-vlrMensal" name="edit-despesa-vlrMensal">
                     <p>Quantidade de Parcelas</p>
-                    <input type="text" class="form-control" name="edit-despesa-qtd_parcelas">
-                    <p>Venvimento</p>
-                    <input type="text" class="form-control" name="edit-despesa-vcto">
+                    <input type="text" class="form-control" id="edit-despesa-qtd_parcelas" name="edit-despesa-qtd_parcelas">
+                    <p>Vencimento</p>
+                    <input type="text" class="form-control" id="edit-despesa-vcto" name="edit-despesa-vcto">
                 </form>
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" onclick="editarDespesa()" class="btn btn-primary">Ok</button>
+                <button type="button" onclick="btn_editaDespesa()" class="btn btn-primary">Ok</button>
                 </div>
             </div>
             </div>
         </div>
         <!-- fim modal editar-->
-        
-        <!-- Modal Delete -->
-            <div class="modal" id="ModalDel" role="dialog">
-                <div class="modal-dialog" role="document"></div>
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5>Excluir</h5>
-                        <span class="id" style="display: none;"></span>
-                            <button type="button" class="close" data-dissmiss="modal" aria-hidden="true">&times;</button>
-                        
-                        </div>
-                        <div class="modal-body">
-                            <p class="sucess-message">Tem certeza de que quer excluir o registro?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-success delete-confirm" onclick="deleteDespesa()" type="button">Sim</button>
-                            <button class="btn btn-default" type="button" data-dismiss="modal">Não</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <!-- fim modal delete-->
         <!-- FIM MODAIS -->
 
 
     <script src="libs/JQuery/jquery-3.4.1.min.js"></script>
-    <script src="libs/Bootstrap/bootstrap.min.js"></script> 
     <script src="libs/PopperJS/popper.min.js"></script> 
+    <script src="libs/Bootstrap/bootstrap.min.js"></script> 
     
     <!-- bootstrapTable -->
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
@@ -175,7 +153,7 @@
 
     <!-- bootbox -->
     <script scr="libs/Bootbox/bootbox.locales.min.js"></script>
-    <script src="libs/Bootbox/bootbox.locales.min.js"></script>
+    <script src="libs/Bootbox/bootbox.min.js"></script>
 
     <script>
         // $("#tableDespesas").bootstrapTable();
@@ -192,6 +170,7 @@
         $("#form_vencimento").mask('9999/99/99')
         // fim de setagens padrao
 
+        //a funcao a baixo carrega os botoes de acoes para dentro da celula da tablea
         function functionAcao(campo, obj, indice)
         {
             return `<button onclick="modalEditar(${obj.id})" class="btn">EDITAR</button> <button onclick="modalDel(${obj.id})" class="btn">EXCLUIR</button>`;
@@ -210,9 +189,10 @@
                 type: 'POST',
                 // dataType: 'JSON', a gente especificava que a resp vinha em JSON mas o PHP devolviaa um array
                 success: function(ret){
-                    console.log(ret)
-                    carregaDadosTabela()
-                    alert("registro feito com sucesso!")
+                    console.log(ret);
+                    carregaDadosTabela();
+                    alert("registro feito com sucesso!");
+                    $("#formCadastroDespesa")[0].reset();
                 },
                 error: function(err)
                 {
@@ -221,78 +201,69 @@
                 }
             })
         }
-
+        
         function modalEditar(id)
         {
             $("#modalEdit").modal("show");
-            // $.get('http://localhost/crud_basico/controller/controllerIndexDespesabyId.php?id='+id, (result) => {
-            // const json = JSON.parse(result);
-            // if(json.despesa == null) {
-            //     alert('Despesa não encontrada');
-            //     return;
-            // }
-            // const despesa = json.despesa;
-            // console.log(despesa)
-            // $('input[name=edit-despesa-descricao]').val(despesa.descricao);
-            // $('.id-despesa').html(id);
-            // $('input[name=edit-despesa-vlrTotal]').val(despesa.vlr_total);
-            // $('input[name=edit-despesa-vlrMensal]').val(despesa.vlr_mensal);
-            // $('input[name=edit-despesa-qtd_parcelas]').val(despesa.qtd_parcelas);
-            // $('input[name=edit-despesa-vcto]').val(despesa.vencimento);
-            
-            // $('#modalEdit').show();
-        // });
+            //carrega dados para cara input do form do modal
+            $.ajax({
+                url: "controller/controllerIndexDespesabyId.php?id="+id,
+                success: function(ret){
+                    let retorno = JSON.parse(ret);
+                    $("#formEdit_id").val(id);
+                    $("#edit-despesa-descricao").val(retorno["despesa"]["descricao"]);
+                    $("#edit-despesa-vlrTotal").val(retorno["despesa"]["vlr_total"]);
+                    $("#edit-despesa-vlrMensal").val(retorno["despesa"]["vlr_mensal"]);
+                    $("#edit-despesa-qtd_parcelas").val(retorno["despesa"]["qtd_parcelas"]);
+                    $("#edit-despesa-vcto").val(retorno["despesa"]["vencimento"]);
+                },
+                error: function(err){
+                    bootbox.alert("Erro na comunicação com o Banco de Dados. Contate os desenvolvedores.")
+                }
+            })
         }
         
-        function editarDespesa()
+        function btn_editaDespesa()
         {
-            let id = $('.id-despesa').html();
-            let descricao           = $("input[name=edit-despesa-descricao]").val()
-            let vlrTotal       = $("input[name=edit-despesa-vlrTotal]").val()
-            let vlrMensal      = $("input[name=edit-despesa-vlrMensal]").val()
-            let qtdParcelas     = $("input[name=edit-despesa-qtd_parcelas]").val()
-            let vcto    = $("input[name=edit-despesa-vcto]").val()
-            
-            $.post('controller/controllerIndexUpdate.php', {
-                'edit-despesa-descricao': descricao,
-                'edit-despesa-vlrTotal': vlrTotal,
-                'edit-despesa-vlrMensal': vlrMensal,
-                'edit-despesa-qtd_parcelas': qtdParcelas,
-                'edit-despesa-vcto': vcto,
-                'id': id
-            }, function(r){
-                console.log(r);
-            });
-        
+            let formData = new FormData($("#formEdit")[0]);
+
+            $.ajax({
+                url: "controller/controllerIndexUpdate.php",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function(ret){
+                    console.log(ret);
+                    carregaDadosTabela();
+                    $("#formEdit")[0].reset();
+                    $("#modalEdit").modal("hide");
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            })
         }
 
-        function modalDel(id){
-        
-            // console.log(id);
-            
-            // $.get('http://localhost/crud_basico/controller/controllerIndexDespesabyId.php?id='+id, (result) => {
-            // const json = JSON.parse(result);
-            // if(json.despesa == null) {
-            //     alert('Despesa não encontrada');
-            //     return;
-            // }
-            // $('.id').html(id);
-            // const despesa = json.despesa;
-            // console.log(despesa)
-            // $('#ModalDel').show();
-        //})
-        bootbox.alert("id: "+id);
-        
-        }
-
-        function deleteDespesa(){
-            let id = $('.id').html();
-            $.post('controller/controllerIndexDelete.php', {
-                'id': id
-            }, function(r){
-                console.log(r);
-            });
-
+        function modalDel(id)
+        {
+            bootbox.confirm("Deseja mesmo apagar o registro dessa conta?", function(resposta){
+                if(resposta == true)
+                {
+                    $.ajax({
+                        url: "controller/controllerIndexDelete.php?id="+id,
+                        success: function(ret){
+                            console.log(ret);
+                            carregaDadosTabela();
+                        },
+                        error: function(err){
+                            console.log(err);
+                            bootbox.alert("Erro na comunicação com o Banco de Dados. Contate os desenvolvedores.")
+                        }
+                    })
+                }
+            });        
         }
     </script> 
     </body>

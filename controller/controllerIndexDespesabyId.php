@@ -4,7 +4,7 @@
         require_once("../modal/DespesaDAO.php");
         
         $objDespesasCRUD_DAO = new DespesaDAO();
-        $objDespesasCRUD_DAO->getDepesa($_GET['id']);
+        $objDespesasCRUD_DAO->getDepesa($_REQUEST['id']);
     }
     catch(Exception $e)
     {
